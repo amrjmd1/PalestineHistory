@@ -1,0 +1,320 @@
+@font-face {
+  font-family: fontBlack;
+  src: url("../fonts/Cairo/Cairo-Black.ttf");
+}
+
+@font-face {
+  font-family: fontBold;
+  src: url("../fonts/Cairo/Cairo-Bold.ttf");
+}
+
+@font-face {
+  font-family: fontExtraLight;
+  src: url("../fonts/Cairo/Cairo-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: fontLight;
+  src: url("../fonts/Cairo/Cairo-Light.ttf");
+}
+
+@font-face {
+  font-family: fontRegular;
+  src: url("../fonts/Cairo/Cairo-Regular.ttf");
+}
+
+@font-face {
+  font-family: fontSemiBold;
+  src: url("../fonts/Cairo/Cairo-SemiBold.ttf");
+}
+
+/* line 5, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+* {
+  font-family: "Font Awesome 5 Free", 'fontSemiBold' !important;
+}
+
+/* line 9, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+body {
+  min-height: 100vh;
+  background: #eee;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* line 13, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+body.padding_top_manger {
+  padding-top: 100px;
+}
+
+/* line 16, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+body > .nicescroll-rails {
+  z-index: 9999 !important;
+}
+
+/* line 19, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+body.padding {
+  padding-right: 200px;
+}
+
+/* line 24, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.falseInput {
+  border-color: #f03434 !important;
+  -webkit-box-shadow: 0 0 5px #f03434 !important;
+  -moz-box-shadow: 0 0 5px #f03434 !important;
+  box-shadow: 0 0 5px #f03434 !important;
+}
+
+/* line 30, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.check-T {
+  color: #00B16A;
+}
+
+/* line 33, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.check-F {
+  color: #f03434;
+}
+
+/* line 39, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.text-right th {
+  text-align: inherit;
+}
+
+/* line 44, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.nicescroll-rails {
+  background: rgba(2, 204, 186, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow-x: hidden !important;
+}
+
+/* line 48, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.nicescroll-rails .nicescroll-cursors {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #02ccba !important;
+  border-color: transparent !important;
+}
+
+/* line 55, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip {
+  min-width: 200px !important;
+}
+
+/* line 57, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip h4 {
+  min-width: 180px !important;
+}
+
+/* line 61, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip.top .tooltip-arrow {
+  border-top-color: #fff !important;
+}
+
+/* line 66, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip.left .tooltip-arrow {
+  border-left-color: #fff !important;
+}
+
+/* line 71, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #fff !important;
+}
+
+/* line 76, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip.right .tooltip-arrow {
+  border-right-color: #fff !important;
+}
+
+/* line 80, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip-inner {
+  background: #fff;
+  color: #02ccba;
+  -webkit-box-shadow: 0 0 5px #999;
+  -moz-box-shadow: 0 0 5px #999;
+  box-shadow: 0 0 5px #999;
+  font-family: "Font Awesome 5 Free", 'fontSemiBold' !important;
+}
+
+/* line 85, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.tooltip-inner .title {
+  color: #999;
+  display: block;
+}
+
+/* line 95, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.form-control:focus {
+  border-color: #02ccba;
+  -webkit-box-shadow: 0 0 8px rgba(2, 204, 186, 0.5);
+  -moz-box-shadow: 0 0 8px rgba(2, 204, 186, 0.5);
+  box-shadow: 0 0 8px rgba(2, 204, 186, 0.5);
+}
+
+/* line 100, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper {
+  width: 100%;
+}
+
+/* line 103, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select * {
+  text-align: right !important;
+}
+
+/* line 106, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .caret {
+  left: 12px;
+  right: auto !important;
+}
+
+/* line 110, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select span.text {
+  margin: 0 !important;
+}
+
+/* line 113, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .glyphicon-ok {
+  right: auto !important;
+  left: 10px !important;
+}
+
+/* line 116, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .glyphicon-ok::before {
+  content: "\f14a" !important;
+  font-family: "Font Awesome 5 Free";
+  color: #02ccba;
+}
+
+/* line 122, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .dropdown-menu {
+  width: inherit !important;
+}
+
+/* line 124, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .dropdown-menu ul {
+  overflow: hidden !important;
+  font-family: 'fontBold' !important;
+}
+
+/* line 127, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.select-wrapper .bootstrap-select .dropdown-menu ul li {
+  overflow-wrap: break-word !important;
+}
+
+/* line 135, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.my-carousel {
+  overflow: hidden;
+  width: 100%;
+  margin: 40px auto 0;
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 141, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.my-carousel .item {
+  margin: auto;
+  padding: 10px;
+  min-height: 350px;
+  overflow: auto;
+}
+
+/* line 150, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.navbar .manger {
+  margin: 0 auto;
+  height: 30px;
+  color: #02ccba;
+  padding: 5px 100px;
+  background: #000;
+}
+
+/* line 156, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.navbar .manger a {
+  float: left;
+}
+
+/* line 163, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu {
+  width: 200px;
+  height: calc(100vh - 50px);
+  top: 50px;
+  background: #222222;
+  color: #666666;
+  position: fixed;
+  right: 0;
+  z-index: 9999;
+  padding: 15px 5px 5px;
+}
+
+/* line 167, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu.manger_height {
+  height: calc(100vh - 80px);
+  top: 80px;
+}
+
+/* line 177, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu-show {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  right: 30px;
+  top: 10px;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* line 187, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu-show i {
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+/* line 191, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu ul {
+  padding: 0;
+}
+
+/* line 193, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu ul li {
+  list-style: none;
+}
+
+/* line 195, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu ul li.active {
+  color: #02ccba;
+}
+
+/* line 199, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu ul ul {
+  padding-right: 15px;
+}
+
+/* line 203, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu a {
+  font-size: 18px;
+  color: inherit;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  padding: 5px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+/* line 211, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/main.scss */
+.fixed-menu a:hover {
+  color: #999999;
+}
+
+/*# sourceMappingURL=../css/main.map */

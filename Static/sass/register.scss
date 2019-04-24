@@ -1,0 +1,147 @@
+$countProgress: 3;
+$mainColor: #27d4d7;
+$backgroundColor: #eee;
+@import "mixin";
+body {
+  background: $backgroundColor;
+}
+
+.my-progress {
+  width: 50%;
+  margin: 20px auto 0;
+  position: relative;
+  background: #ccc;
+  height: 4px;
+
+  .fill {
+    position: absolute;
+    background: $mainColor;
+    height: 4px;
+    width: 0;
+  }
+  .circle {
+    position: absolute;
+    background: inherit;
+    color: $backgroundColor;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    @include borderR(50%);
+    text-align: center;
+    top: -13px;
+    z-index: 2;
+    font-size: 18px;
+    &.active {
+      &-check {
+        background: $mainColor;
+        color: #fff;
+        line-height: 30px;
+      }
+      &-now {
+        border: 2px solid $mainColor;
+        background: $backgroundColor;
+        color: $mainColor;
+        line-height: 30px;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -29px;
+          left: 0px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 15px 15px;
+          border-color: transparent transparent #fff;
+        }
+      }
+    }
+    @for $i from 1 through ($countProgress - 1) {
+      &:nth-child(#{$i + 1}) {
+        right: 100% * ($i/($countProgress - 1))
+      }
+    }
+  }
+}
+
+.my-carousel {
+  .item {
+    &.first-face {
+      padding: 50px;
+      font-size: 18px;
+      ul li {
+        @include title();
+        list-style: none;
+      }
+    }
+    &.form-register {
+      padding: 50px 20px;
+      form div {
+        @media (min-width: 992px) {
+          float: right;
+        }
+        margin-bottom: 10px;
+      }
+      .show-password {
+        &-click {
+          width: 10%;
+          float: left;
+          border-radius: 3px 0 0 3px;
+          margin: 0 !important;
+          background: #EEEEEE;
+          color: #dddddd;
+          padding: 6px 0;
+          text-align: center;
+          cursor: pointer;
+          border: 1px solid #cccccc;
+          &.active {
+            background: #cccccc;
+            color: #666;
+          }
+        }
+        input {
+          display: inline-block !important;
+          width: 90% !important;
+          border-radius: 0 3px 3px 0;
+          border-left: none;
+        }
+      }
+    }
+    .footer-register {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      .btn {
+        float: left;
+        margin-left: 3px;
+        background: $mainColor;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.collapse-register {
+  padding-top: 15px;
+  span {
+    color: #999999;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  li {
+    padding-right: 10px;
+    display: inline-block;
+    width: 100%;
+    list-style: none !important;
+    &.check-password {
+      color: #00B16A;
+    }
+  }
+}
+.my-alert {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+.swal-modal * {
+  text-align: center !important;
+}

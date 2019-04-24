@@ -1,0 +1,127 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block ActiveCategory %}
+    active
+{% endblock %}
+{% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تعديل اسم الفئة</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label for="name_category">اسم الفئة</label><input id="name_category">
+                    </p>
+                    <p>
+                        <label for="description_category">اسم الفئة</label><textarea
+                            id="description_category"></textarea>
+                    </p>
+                    <span id="Edit_Category_Message"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                    <button type="button" class="btn btn-primary" id="Edit_Category_Submit" data-id="">تعديل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if all_category %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>اسم الفئة</th>
+                <th>المعرف</th>
+                <th>وضف الفئة</th>
+                <th>الإعدادات</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in all_category %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ category.title }}</td>
+                    <td>{{ category.identity }}</td>
+                    <td>
+                        {% if category.description is not None %}
+                            {{ category.description }}
+                        {% endif %}
+                    </td>
+                    <td data-id="{{ category.id }}" data-title="{{ category.title }}"
+                        data-description="{{ category.description }}">
+                        <button class="btn Remove_Category_onClick" type="button"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn Edit_Category_Target">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <span>لا توجد فئات ليتم عرضها</span>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('.Edit_Category_Target').on('click', function () {
+            var category_id = $(this).parent().data("id"),
+                category_title = $(this).parent().data("title"),
+                category_description = $(this).parent().data("description");
+            $('#Edit_Category_Submit').attr("data-id", category_id);
+            $('#name_category').val(category_title);
+            $('#description_category').val(category_description);
+            $('#exampleModal').modal('show');
+        });
+        $('#Edit_Category_Submit').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Category:Edit_Category_Ajax' %}",
+                data: {
+                    'id': $(this).data("id"),
+                    'title': $('#name_category').val(),
+                    'description': $('#description_category').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    $("#process_result").html(data.status);
+                    if (data.status === 'Done') {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+
+        $('.Remove_Category_onClick').on('click', function () {
+            var category_id = $(this).parent().data("id"),
+                this_tr = $(this);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Category:Remove_Category_Ajax' %}",
+                data: {
+                    'id': category_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    $("#process_result").html(data.status);
+                    if (data.status === 'Done') {
+                        this_tr.parentsUntil('tbody').remove();
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

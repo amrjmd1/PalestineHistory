@@ -1,0 +1,226 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <style>
+        #view_users_table {
+            cursor: pointer;
+        }
+
+        #ModalDetail input, #ModalDetail select {
+            border-radius: 10px;
+            padding: 5px;
+            border: 1px solid #bbb;
+            width: 300px;
+            float: left;
+            margin-left: 80px;
+        }
+
+        #ModalDetail label {
+            padding: 5px 2px
+        }
+
+        #derail_user_form {
+            font-size: 16px
+        }
+
+        #form_Message {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+{% block ActiveUsers %}active{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="ModalDetailLabel"><b>بيانات المستخدم</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="detail_user_form">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_user_model">
+                            <p><label>الاسم الأول</label><input name="name1_user_model"></p>
+                            <p><label>اسم الأب</label><input name="name2_user_model"></p>
+                            <p><label>اسم الجد</label><input name="name3_user_model"></p>
+                            <p><label>اسم العائلة</label><input name="name4_user_model"></p>
+                            <p><label>البريد الإلكتروني</label><input name="email_user_model" style="text-align:left">
+                            </p>
+                            {% if admin_is_manager %}
+                                <p><label>كلمة المرور</label><input name="password_user_model"></p>
+                            {% endif %}
+                            <p><label>الهاتف</label><input name="mobile_user_model"></p>
+                            <p><label>الهوية</label><input name="identity_user_model"></p>
+                            <p><label>الفئة</label>
+                                <select name="category_user_model">
+                                    {% if all_category %}
+                                        {% for category in all_category %}
+                                            <option value="{{ category.identity }}">{{ category.title }}</optionn>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </p>
+                            <p><label>الجنس</label>
+                                <select name="gender_user_model">
+                                    <option value="1">ذكر</option>
+                                    <option value="2">أنثى</option>
+                                </select>
+                            </p>
+                            <p><label>الحالة</label>
+                                <select name="is_active_user_model">
+                                    <option value="1">فعال</option>
+                                    <option value="2">غير فعال</option>
+                                </select>
+                            </p>
+                        </form>
+                        <p id="form_Message"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                        <button type="button" class="btn btn-danger" id="Trash_User_Submit" data-id="">حذف المستخدم
+                        </button>
+                        <button type="button" class="btn btn-primary" id="Edit_User_Submit" data-id="">تعديل
+                            البيانات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table width="100%" class="table table-striped" id="view_users_table">
+        <thead>
+        <tr class="text-right">
+            <th>م</th>
+            <th>الاسم رباعي</th>
+            <th>البريد الإلكتروني</th>
+            <th>الهوية</th>
+            <th>الفئة</th>
+            <th>الهاتف</th>
+            <th>الجنس</th>
+            <th>الحالة</th>
+            {% if admin_is_manager %}
+                <th>كلمة المرور</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in all_client %}
+            <tr class="tr_view_user" data-category="{{ client.category.identity }}" data-id="{{ client.id }}">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ client.first_name }}&nbsp;{{ client.father_name }}&nbsp;{{ client.grand_name }}&nbsp;{{ client.last_name }} </td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.identity }}</td>
+                <td>{{ client.category.title }}</td>
+                <td>{{ client.mobile }}</td>
+                <td>
+                    {% if client.gender == "1" %}
+                        <span class="mail">ذكر</span>
+                    {% elif client.gender == "2" %}
+                        <span class="femail">أنثى</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if client.is_active %}
+                        <i class="fa fa-check-circle  check-T"></i>
+                    {% else %}
+                        <i class="fa fa-times-circle check-F"></i>
+                    {% endif %}
+                </td>
+                {% if admin_is_manager %}
+                    <td>{{ client.password }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).on("click", ".tr_view_user", function (ev) {
+            ev.preventDefault();
+            var full_name = $(this).find('td:nth-child(2)').html();
+            $('select').find('option:selected', this).removeAttr('selected');
+            if ($(this).find('td:nth-child(8)').find('i').hasClass('check-T')) {
+                $('select[name=is_active_user_model] option[value="1"]').attr('selected', 'selected');
+            } else {
+                $('select[name=is_active_user_model] option[value="2"]').attr('selected', 'selected');
+            }
+            if ($(this).find('td:nth-child(7)').find('span').hasClass('mail')) {
+                $('select[name=gender_user_model] option[value="1"]').attr('selected', 'selected');
+            } else {
+                $('select[name=gender_user_model] option[value="2"]').attr('selected', 'selected');
+            }
+            $('select[name=category_user_model] option[value=' + $(this).data('category') + ']').attr('selected', 'selected');
+            full_name = full_name.split('&nbsp;');
+            $('input[name=id_user_model]').val($(this).data('id'));
+            $('input[name=name1_user_model]').val(full_name[0]);
+            $('input[name=name2_user_model]').val(full_name[1]);
+            $('input[name=name3_user_model]').val(full_name[2]);
+            $('input[name=name4_user_model]').val(full_name[3]);
+            $('input[name=email_user_model]').val($(this).find('td:nth-child(3)').html());
+            $('input[name=identity_user_model]').val($(this).find('td:nth-child(4)').html());
+            $('input[name=category_user_model]').val($(this).find('td:nth-child(5)').html());
+            $('input[name=mobile_user_model]').val($(this).find('td:nth-child(6)').html());
+            if ("{{ admin_is_manager }}" === "True") {
+                $('input[name=password_user_model]').val($(this).find('td:nth-child(9)').html());
+            }
+            $('#ModalDetail').modal('show');
+            return false;
+        });
+
+        $("#Trash_User_Submit").click(function (ev) {
+            ev.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Users:Remove_User_Ajax' %}",
+                data: $('#detail_user_form').serialize(),
+                success: function (data) {
+                    if (data.status === "Empty") {
+                        $("#form_Message").html("الرجاء المحاولة فيما بعد");
+                    } else if (data.status === "NotExists") {
+                        $("#form_Message").html("هذا المستخدم غير موجود في قاعدة البيانات");
+                    } else if (data.status === "Done") {
+                        $("#form_Message").html("تمت العملية بنجاح");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else if (data.status === "Fail") {
+                        $("#form_Message").html("فشلت المحاولة، حاول فيما بعد");
+                    }
+                }
+            })
+            return false;
+        });
+
+        $("#Edit_User_Submit").click(function (ev) {
+            ev.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Users:Edit_User_Ajax' %}",
+                data: $('#detail_user_form').serialize(),
+                success: function (data) {
+                    if (data.status === "Empty") {
+                        $("#form_Message").html("الرجاء المحاولة فيما بعد");
+                    } else if (data.status === "NotExists") {
+                        $("#form_Message").html("هذا المستخدم غير موجود في قاعدة البيانات");
+                    } else if (data.status === "Done") {
+                        $("#form_Message").html("تمت العملية بنجاح");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else if (data.status === "Fail") {
+                        $("#form_Message").html("فشلت المحاولة، حاول فيما بعد");
+                    }
+                }
+            })
+            return false;
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block ActiveExam %}
+    active
+{% endblock %}
+{% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تعديل اسم الفئة</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="name_event">اسم الفئة</label><input id="name_event" placeholder="">
+                    <span id="Edit_Event_Message"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                    <button type="button" class="btn btn-primary" id="Edit_Event_Submit" data-id="">تعديل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>العنوان</th>
+            <th>الحالة</th>
+            <th>الفئة</th>
+            <th>بداية الاختبار</th>
+            <th>نهاية الاختبار</th>
+            <th>مدة الاختبار</th>
+            <th>عدد المحاولات</th>
+            <th>تخطيط</th>
+            <th>العشوائية</th>
+            <th>معاينة الاجابات</th>
+            <th>ظهور الدرجة</th>
+            <th>الوصف</th>
+            <th>الاعدادات</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for exam in all_Exam %}
+            <tr>
+                <td>{{ exam.id }}</td>
+                <td>{{ exam.name }}</td>
+                <td>
+                    {% if exam.active %}
+                        <i class="fa fa-check-circle  check-T"></i>
+                    {% else %}
+                        <i class="fa fa-times-circle check-F"></i>
+                    {% endif %}
+                </td>
+                <td>{{ exam.category.title }}</td>
+                <td>{{ exam.start_allow }}</td>
+                <td>{{ exam.end_allow }}</td>
+                <td>{{ exam.time }}</td>
+                <td>{{ exam.attempts }}</td>
+                <td>{{ exam.Layout }}</td>
+                <td>{{ exam.Shuffle }}</td>
+                <td>{{ exam.preview }}</td>
+                <td>{{ exam.grade }}</td>
+                <td>{{ exam.description }}</td>
+                <td data-id="{{ exam.id }}" data-title="{{ exam.title }}">
+                    <button class="btn Remove_Event_onClick"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn Edit_Event_Target">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

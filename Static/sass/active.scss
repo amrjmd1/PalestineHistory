@@ -1,0 +1,67 @@
+@import "mixin";
+
+.my-progress {
+  width: 50%;
+  margin: 20px auto 0;
+  position: relative;
+  background: #ccc;
+  height: 4px;
+  .fill {
+    position: absolute;
+    background: $mainColor;
+    height: 4px;
+    width: 100%;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      left: -10px;
+      top: -3px;
+      @include borderR(50%);
+      background: inherit;
+    }
+  }
+  .circle {
+    position: absolute;
+    background: inherit;
+    color: $backgroundColor;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    @include borderR(50%);
+    text-align: center;
+    top: -13px;
+    z-index: 2;
+    font-size: 18px;
+    &.active {
+      &-check {
+        background: $mainColor;
+        color: #fff;
+      }
+      &-now {
+        border: 2px solid $mainColor;
+        background: $backgroundColor;
+        color: $mainColor;
+        line-height: 25px;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -29px;
+          left: 0;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 15px 15px;
+          border-color: transparent transparent #fff;
+        }
+      }
+    }
+  }
+}
+
+.my-carousel {
+  .item {
+
+  }
+}

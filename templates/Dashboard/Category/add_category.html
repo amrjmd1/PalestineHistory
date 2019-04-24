@@ -1,0 +1,55 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+    اضف فئة جديدة
+
+    <div>
+        <form action="" method="post" id="Add_Category_Form" class="form-horizontal">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p>
+                                <input name="title_category" placeholder="اسم الفئة" class="form-control">
+                            </p>
+                            <p>
+                                <textarea name="category_description" placeholder="وصف الفئة"
+                                          class="form-control"></textarea>
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" id="add_category_submit" class="btn btn-primary">أضف فئة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span id="process_result"></span>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#add_category_submit').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Category:Add_Category_Ajax' %}",
+                data: $('#Add_Category_Form').serialize(),
+                success: function (data) {
+                    $("#process_result").html(data.status);
+                    if (data.status === 'Done') {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

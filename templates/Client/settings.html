@@ -1,0 +1,188 @@
+{% extends 'master.html' %}
+{% load staticfiles %}
+{% block meta %}
+    <meta property="change_password" content="{% url 'Client:Change_Password_Ajax' %}">
+    <meta property="change_email" content="{% url 'Client:Change_Email_Ajax' %}">
+    <meta property="save_settings" content="{% url 'Client:Save_Settings_Ajax' %}">
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        {% if client.is_active %}
+            <div id="parent_loader">
+                <div class="loader"></div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="list-type3">
+                    <ul style="list-style-type:none">
+                        <li><a data-id="1" class="active_li">إعدادات الحساب</a></li>
+                        <li><a data-id="2">البريد الإلكتروني</a></li>
+                        <li><a data-id="3">كلمة المرور</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-10 settings_div div_1 active">
+                <form id="Save_Settings_Form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="wrap">
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="name1" class="mat-label">الاسم الأول</label>
+                                <input class="mat-input" id="name1" name="name1" value="{{ client.first_name }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="name2" class="mat-label">اسم الأب</label>
+                                <input class="mat-input" id="name2" name="name2" value="{{ client.father_name }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="name3" class="mat-label">اسم الجد</label>
+                                <input class="mat-input" id="name3" name="name3" value="{{ client.grand_name }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="name4" class="mat-label">اسم العائلة</label>
+                                <input class="mat-input" id="name4" name="name4" value="{{ client.last_name }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="phone" class="mat-label">الهاتف المحمول</label>
+                                <input class="mat-input" id="phone" name="phone" value="{{ client.mobile }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat-div">
+                                <label for="id" class="mat-label">رقم الهوية</label>
+                                <input class="mat-input" id="id" name="id_client" value="{{ client.identity }}">
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat_div_gender">
+                                <div class="select-wrapper">
+                                    <span class="mat_label">الفئة</span>
+                                    <select class="form-control show-tick" data-size="4" name="category">
+                                        <option disabled>قم بإختيار الفئة المناسبة لك</option>
+                                        {% if category_all %}
+                                            {% for category in category_all %}
+                                                <option value="{{ category.identity }}"
+                                                        {% if client.category.id == category.id %}
+                                                        selected {% endif %}>{{ category.title }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6">
+                            <div class="mat_div_gender">
+                                <span class="mat_label">الجنس</span>
+                                <div class="select-wrapper">
+                                    <select class="form-control show-tick" data-size="4" name="gender">
+                                        <option disabled>حدد الجنس</option>
+                                        <option value="1" {% if client.gender == "1" %}selected{% endif %}>ذكر</option>
+                                        <option value="2" {% if client.gender == "2" %}selected{% endif %}>أنثى</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button id="Save_Settings_Submit">حفظ الإعدادات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-10 settings_div div_2">
+                <form id="Change_Email_Form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="col-md-12">
+                        <div class="parent_mat-div col-md-6 col-md-offset-3">
+                            <div class="mat-div">
+                                <label for="email" class="mat-label">البريد الإلكتروني الحالي</label>
+                                <input style="direction: ltr;" class="mat-input" id="email" name="email"
+                                       value="{{ client.email }}" readonly>
+                            </div>
+                        </div>
+                        <div class="parent_mat-div col-md-6 col-md-offset-3">
+                            <div class="mat-div">
+                                <label for="new_email" class="mat-label"> البريد الإلكتروني الجديد</label>
+                                <input style="direction: ltr;" class="mat-input" id="new_email" name="new_email"
+                                       value="">
+                            </div>
+                        </div>
+                        <div class="notification col-md-6 col-md-offset-3 alert alert-info">
+                            <strong>ملاحظة</strong>
+                            <span style="padding-right: 5px">سيتم إرسال رمز تحقق جديد للتحقق من صحة البريد الإلكتروني الجديد، وسيتم مطالبتك بإدراج رمز التحقق للإستفادة من حسابك فيما بعد.</span>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                            <button id="Change_Email_Submit">تغيير البريد الإلكتروني</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-10 settings_div div_3">
+                <form id="Change_Password_Form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="col-md-12">
+                        <div class="col-md-6 col-md-offset-3" style="height: 85px">
+                            <div class="mat-div">
+                                <label for="password" class="mat-label">كلمة المرور الحالية</label>
+                                <input class="mat-input" id="password" name="password" value="" type="password">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3" style="height: 85px">
+                            <div class="mat-div">
+                                <label for="new_password" class="mat-label">كلمة المرور الجديدة</label>
+                                <input class="mat-input" id="new_password" name="new_password" value="" type="password">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3" style="height: 85px">
+                            <div class="mat-div">
+                                <label for="re_password" class="mat-label">تأكيد كلمة المرور</label>
+                                <input class="mat-input" id="re_password" name="re_password" value="" type="password">
+                            </div>
+                        </div>
+                        <div class="notification col-md-6 col-md-offset-3 alert alert-info">
+                            <strong>ملاحظة</strong>
+                            <span style="padding-right: 5px">سيتم تسجيل الخروج من الحساب مباشرة ، بعد تغيير كلمة المرور؛ وعليك إدخال كلمة المرور الجديدة في عمليات تسجيل الدخول القادمة</span>
+                            <p><i class="fa fa-lock"></i>&nbsp;كلمة المرور الخاصة بك تحتاج إلى :</p>
+                            <ul style="list-style: none">
+                                <li><i class="fa fa-check"></i> تتكون كلمة المرور على الأقل من 8 أحرف</li>
+                                <li><i class="fa fa-check"></i>تحتوي على حرفين على الأقل</li>
+                                <li><i class="fa fa-check"></i>تتضمن رقم أو رمز واحد على الأقل</li>
+                                <li><i class="fa fa-check"></i>لا تحتوي على بريدك الإلكتروني</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                            <button id="Change_Password_Submit">تغيير كلمة المرور</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <script src="{% static 'js/is_active.js' %}"></script>
+        {% endif %}
+    </div>
+
+{% endblock %}
+{% block script %}
+    {% if client.is_active %}
+        <script src="{% static 'js/settings.js' %}"></script>
+    {% endif %}
+    <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+{% endblock %}
+{% block nice_scroll %}
+{% endblock %}
+{% block bootstrap-select %}
+{% endblock %}

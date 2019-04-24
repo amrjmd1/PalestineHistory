@@ -1,0 +1,217 @@
+@font-face {
+  font-family: fontBlack;
+  src: url("../fonts/Cairo/Cairo-Black.ttf");
+}
+
+@font-face {
+  font-family: fontBold;
+  src: url("../fonts/Cairo/Cairo-Bold.ttf");
+}
+
+@font-face {
+  font-family: fontExtraLight;
+  src: url("../fonts/Cairo/Cairo-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: fontLight;
+  src: url("../fonts/Cairo/Cairo-Light.ttf");
+}
+
+@font-face {
+  font-family: fontRegular;
+  src: url("../fonts/Cairo/Cairo-Regular.ttf");
+}
+
+@font-face {
+  font-family: fontSemiBold;
+  src: url("../fonts/Cairo/Cairo-SemiBold.ttf");
+}
+
+/* line 5, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+body {
+  background: #eee;
+}
+
+/* line 9, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress {
+  width: 50%;
+  margin: 20px auto 0;
+  position: relative;
+  background: #ccc;
+  height: 4px;
+}
+
+/* line 16, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .fill {
+  position: absolute;
+  background: #02ccba;
+  height: 4px;
+  width: 0;
+}
+
+/* line 22, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle {
+  position: absolute;
+  background: inherit;
+  color: #eee;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  top: -13px;
+  z-index: 2;
+  font-size: 18px;
+}
+
+/* line 35, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle.active-check {
+  background: #02ccba;
+  color: #fff;
+  line-height: 30px;
+}
+
+/* line 40, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle.active-now {
+  border: 2px solid #02ccba;
+  background: #eee;
+  color: #02ccba;
+  line-height: 30px;
+}
+
+/* line 45, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle.active-now:after {
+  content: '';
+  position: absolute;
+  bottom: -29px;
+  left: 0px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: transparent transparent #fff;
+}
+
+/* line 59, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle:nth-child(2) {
+  right: 50%;
+}
+
+/* line 59, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-progress .circle:nth-child(3) {
+  right: 100%;
+}
+
+/* line 68, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.first-face {
+  padding: 50px;
+  font-size: 18px;
+}
+
+/* line 71, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.first-face ul li {
+  font-family: 'fontBold' !important;
+  list-style: none;
+}
+
+/* line 76, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.form-register {
+  padding: 50px 20px;
+}
+
+/* line 78, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.form-register form div {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 992px) {
+  /* line 78, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+  .my-carousel .item.form-register form div {
+    float: right;
+  }
+}
+
+/* line 85, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.form-register .show-password-click {
+  width: 10%;
+  float: left;
+  border-radius: 3px 0 0 3px;
+  margin: 0 !important;
+  background: #EEEEEE;
+  color: #dddddd;
+  padding: 6px 0;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #cccccc;
+}
+
+/* line 96, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.form-register .show-password-click.active {
+  background: #cccccc;
+  color: #666;
+}
+
+/* line 101, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item.form-register .show-password input {
+  display: inline-block !important;
+  width: 90% !important;
+  border-radius: 0 3px 3px 0;
+  border-left: none;
+}
+
+/* line 109, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item .footer-register {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+/* line 113, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-carousel .item .footer-register .btn {
+  float: left;
+  margin-left: 3px;
+  background: #02ccba;
+  color: #fff;
+}
+
+/* line 123, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.collapse-register {
+  padding-top: 15px;
+}
+
+/* line 125, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.collapse-register span {
+  color: #999999;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* line 130, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.collapse-register li {
+  padding-right: 10px;
+  display: inline-block;
+  width: 100%;
+  list-style: none !important;
+}
+
+/* line 135, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.collapse-register li.check-password {
+  color: #00B16A;
+}
+
+/* line 140, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.my-alert {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 145, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/register.scss */
+.swal-modal * {
+  text-align: center !important;
+}
+
+/*# sourceMappingURL=../css/register.map */

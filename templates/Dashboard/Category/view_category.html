@@ -1,0 +1,29 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <table width="50%" border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>اسم الفئة</th>
+            <th>المعرف</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in category_oop %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ category.title }}</td>
+                <td>{{ category.identity }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

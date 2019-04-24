@@ -1,0 +1,106 @@
+@font-face {
+  font-family: fontBlack;
+  src: url("../fonts/Cairo/Cairo-Black.ttf");
+}
+
+@font-face {
+  font-family: fontBold;
+  src: url("../fonts/Cairo/Cairo-Bold.ttf");
+}
+
+@font-face {
+  font-family: fontExtraLight;
+  src: url("../fonts/Cairo/Cairo-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: fontLight;
+  src: url("../fonts/Cairo/Cairo-Light.ttf");
+}
+
+@font-face {
+  font-family: fontRegular;
+  src: url("../fonts/Cairo/Cairo-Regular.ttf");
+}
+
+@font-face {
+  font-family: fontSemiBold;
+  src: url("../fonts/Cairo/Cairo-SemiBold.ttf");
+}
+
+/* line 3, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress {
+  width: 50%;
+  margin: 20px auto 0;
+  position: relative;
+  background: #ccc;
+  height: 4px;
+}
+
+/* line 9, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .fill {
+  position: absolute;
+  background: #02ccba;
+  height: 4px;
+  width: 100%;
+}
+
+/* line 14, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .fill:after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: -10px;
+  top: -3px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: inherit;
+}
+
+/* line 25, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .circle {
+  position: absolute;
+  background: inherit;
+  color: #eee;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  top: -13px;
+  z-index: 2;
+  font-size: 18px;
+}
+
+/* line 38, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .circle.active-check {
+  background: #02ccba;
+  color: #fff;
+}
+
+/* line 42, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .circle.active-now {
+  border: 2px solid #02ccba;
+  background: #eee;
+  color: #02ccba;
+  line-height: 25px;
+}
+
+/* line 47, C:/Users/SmartSO/Desktop/osama/Projects/PalestineHistory/Static/sass/active.scss */
+.my-progress .circle.active-now:after {
+  content: '';
+  position: absolute;
+  bottom: -29px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: transparent transparent #fff;
+}
+
+/*# sourceMappingURL=../css/active.map */

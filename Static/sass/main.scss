@@ -1,0 +1,215 @@
+@import "mixin";
+
+
+
+* {
+  @include content();
+}
+
+body {
+  min-height: 100vh;
+  background: $backgroundColor;
+  @include userSelect(none);
+  &.padding_top_manger {
+    padding-top: 100px;
+  }
+  > .nicescroll-rails {
+    z-index: 9999 !important;
+  }
+  &.padding {
+    padding-right: 200px;
+  }
+}
+
+.falseInput {
+  border-color: #f03434 !important;
+  @include boxShadow(5px, #f03434 !important)
+}
+
+.check {
+  &-T {
+    color: #00B16A;
+  }
+  &-F {
+    color: #f03434;
+  }
+}
+
+.text-right {
+  th {
+    text-align: inherit;
+  }
+}
+
+.nicescroll-rails {
+  background: rgba($mainColor, .5);
+  @include borderR(5px);
+  overflow-x: hidden !important;
+  .nicescroll-cursors {
+    @include borderR(5px);
+    background: $mainColor !important;
+    border-color: transparent !important;
+  }
+}
+
+.tooltip {
+  min-width: 200px !important;
+  h4 {
+    min-width: 180px !important;
+  }
+  &.top {
+    .tooltip-arrow {
+      border-top-color: #fff !important;
+    }
+  }
+  &.left {
+    .tooltip-arrow {
+      border-left-color: #fff !important;
+    }
+  }
+  &.bottom {
+    .tooltip-arrow {
+      border-bottom-color: #fff !important;
+    }
+  }
+  &.right {
+    .tooltip-arrow {
+      border-right-color: #fff !important;
+    }
+  }
+  &-inner {
+    background: #fff;
+    color: $mainColor;
+    @include boxShadow(5px, #999);
+    @include content();
+    .title {
+      color: #999;
+      display: block;
+    }
+    .date {
+
+    }
+  }
+}
+
+.form-control:focus {
+  border-color: $mainColor;
+  @include boxShadow(8px, rgba($mainColor, .5))
+}
+
+.select-wrapper {
+  width: 100%;
+  .bootstrap-select {
+    * {
+      text-align: right !important;
+    }
+    .caret {
+      left: 12px;
+      right: auto !important;
+    }
+    span.text {
+      margin: 0 !important;
+    }
+    .glyphicon-ok {
+      right: auto !important;
+      left: 10px !important;
+      &::before {
+        content: "\f14a" !important;
+        font-family: "Font Awesome 5 Free";
+        color: $mainColor;
+      }
+    }
+    .dropdown-menu {
+      width: inherit !important;
+      ul {
+        overflow: hidden !important;
+        @include title();
+        li {
+          overflow-wrap: break-word !important;
+        }
+      }
+    }
+  }
+}
+
+.my-carousel {
+  overflow: hidden;
+  width: 100%;
+  margin: 40px auto 0;
+  background: #fff;
+  @include borderR(10px);
+  .item {
+    margin: auto;
+    padding: 10px;
+    min-height: 350px;
+    overflow: auto;
+  }
+}
+
+.navbar {
+  .manger {
+    margin: 0 auto;
+    height: 30px;
+    color: $mainColor;
+    padding: 5px 100px;
+    background: #000;
+    a {
+      float: left;
+
+    }
+  }
+}
+
+.fixed-menu {
+  width: 200px;
+  height: calc(100vh - 50px);
+  top: 50px;
+  &.manger_height {
+    height: calc(100vh - 80px);
+    top: 80px;
+  }
+  background: #222222;
+  color: #666666;
+  position: fixed;
+  right: 0;
+  z-index: 9999;
+  padding: 15px 5px 5px;
+  &-show {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    right: 30px;
+    top: 10px;
+    color: inherit;
+    text-align: center;
+    cursor: pointer;
+    i {
+      @include transition(.8s)
+    }
+  }
+  ul {
+    padding: 0;
+    li {
+      list-style: none;
+      &.active {
+        color: $mainColor;
+      }
+    }
+    ul {
+      padding-right: 15px;
+    }
+  }
+  a {
+    font-size: 18px;
+    color: inherit;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    padding: 5px;
+    @include transition(.5s);
+    &:hover {
+      color: #999999;
+    }
+  }
+}

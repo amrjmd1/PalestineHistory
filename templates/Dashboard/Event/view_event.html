@@ -1,0 +1,124 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block ActiveEvent %}active{% endblock %}
+{% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تعديل اسم الفئة</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="name_event">اسم الفئة</label><input id="name_event" placeholder="">
+                    <span id="Edit_Event_Message"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                    <button type="button" class="btn btn-primary" id="Edit_Event_Submit" data-id="">تعديل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table width="100%" class="table table-striped">
+        <thead>
+        <tr class="text-right">
+            <th>ID</th>
+            <th>عنوان الحدث</th>
+            <th>الحالة</th>
+            <th>الفئة</th>
+            <th>بداية الحدث</th>
+            <th>نهاية الحدث</th>
+            <th>الوصف</th>
+            <th>معرف</th>
+            <th><i class="fa fa-cogs"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in all_event %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ event.title }}</td>
+                <td>
+                    {% if event.active %}
+                        <i class="fa fa-check-circle  check-T"></i>
+                    {% else %}
+                        <i class="fa fa-times-circle check-F"></i>
+                    {% endif %}
+                </td>
+                <td>{{ event.category.title }}</td>
+                <td>{{ event.start_date }}</td>
+                <td>{{ event.end_date }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.identity }}</td>
+                <td data-id="{{ event.id }}" data-title="{{ event.title }}">
+                    <button class="btn Remove_Event_onClick" type="button"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn Edit_Event_Target">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+
+    <script>
+        $('.Edit_Event_Target').on('click', function () {
+            var event_id = $(this).parent().data("id"),
+                event_title = $(this).parent().data("title");
+            $('#Edit_Event_Submit').attr("data-id", event_id);
+            $('#name_event').attr("placeholder", event_title);
+            $('#exampleModal').modal('show');
+        });
+        $('#Edit_Event_Submit').on('click', function () {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Event:Edit_Event_Ajax' %}",
+                data: {
+                    'id': $(this).data("id"),
+                    'title': $('#name_event').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    $("#process_result").html(data.status);
+                    if (data.status === 'Done') {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+
+        $('.Remove_Event_onClick').on('click', function () {
+            var event_id = $(this).parent().data("id"),
+                this_tr = $(this);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'Dashboard:Event:Remove_Event_Ajax' %}",
+                data: {
+                    'id': event_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    $("#process_result").html(data.status);
+                    if (data.status === 'Done') {
+                        this_tr.parentsUntil('tbody').remove();
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

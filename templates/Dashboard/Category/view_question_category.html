@@ -1,0 +1,43 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+    <table width="50%" border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>السؤال</th>
+            <th>الاجابة الصحيحة</th>
+            <th>الاجابة2</th>
+            <th>الاجابة3</th>
+            <th>الاجابة4</th>
+            <th>الإعدادات</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ question.question }}</td>
+                <td>{{ question.answer_1 }}</td>
+                <td>{{ question.answer_2 }}</td>
+                <td>{{ question.answer_3 }}</td>
+                <td>{{ question.answer_4 }}</td>
+                <td data-id="{{ category.id }}" data-title="{{ category.title }}">
+                    <span class="Remove_Question_onClick">أيقونة حذف</span>
+                    <button type="button" class="btn btn-primary Edit_Question_Target">
+                        <span>أيقونة تعديل</span>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

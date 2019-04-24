@@ -1,0 +1,67 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+   <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">جاري رفع الاسئلة</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0;">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-muted text-center">
+        <div class="col-md-6 well">
+            <div style="padding-top: 4rem; padding-bottom: 4rem;">
+                <span class="fa fa-upload" style="font-size: 4rem;"></span>
+                <h3>اسحب الملف هنا للرفع</h3>
+            </div>
+        </div>
+        <div class="col-md-6 well">
+            <button type="button" class="btn btn-primary js-upload-photos center-block">
+                <span class="fa fa-upload"></span> أرفق ملف
+            </button>
+            <h3>أضغط هنا لتحديد الملف</h3>
+        </div>
+        <input id="fileupload" type="file" name="file" multiple
+               style="display: none;"
+               data-url="{% url 'Dashboard:Questions:Upload_Excel_Ajax' %}"
+               data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+    </div>
+
+
+
+
+    {{ notes }}
+    <table id="gallery" class="table">
+        <thead>
+        <tr>
+            <th>اسم الملف</th>
+            <th>المسار كامل</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for excel in excel_list %}
+            <tr>
+                <td><a href="{{ excel.file.url }}">{{ excel.file.name }}</a></td>
+                <td>{{ excel.file.url }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'js/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'js/jquery.fileupload.js' %}"></script>
+    <script src="{% static 'js/basic-upload.js' %}"></script>
+{% endblock %}

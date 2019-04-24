@@ -1,0 +1,37 @@
+{% extends 'Dashboard/master.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block ActiveQuestion %}
+active
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th><i class="fa fa-question"></i>&nbsp;السؤال</th>
+            <th>الفئة</th>
+            <th><i class="fa fa-check check-T"></i>&nbsp;الإجابة الصحيحة</th>
+            <th><i class="fa fa-times check-F"></i>&nbsp;الإجابة الثانية</th>
+            <th><i class="fa fa-times check-F"></i>&nbsp;الإجابة الثالثة</th>
+            <th><i class="fa fa-times check-F"></i>&nbsp;الإجابة الرابعة</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for Question in Questions %}
+            <tr>
+                <td>{{ Question.question }}</td>
+                <td>{{ Question.category.title }}</td>
+                <td>{{ Question.answer_1 }}</td>
+                <td>{{ Question.answer_2 }}</td>
+                <td>{{ Question.answer_3 }}</td>
+                <td>{{ Question.answer_4 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

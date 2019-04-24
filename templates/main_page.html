@@ -1,0 +1,255 @@
+{% extends 'master.html' %}
+{% load staticfiles %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fullpage.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mainPage.css' %}">
+{% endblock %}
+{% block body %}
+    {% block nav %}
+    {% endblock %}
+    <div class="navbar navbar-fixed-top backgraound-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="menu-sections">
+                    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">الرئيسية</a></li>
+                    <li data-menuanchor="secondPage"><a href="#secondPage">اهداف المسابقة</a></li>
+                    <li data-menuanchor="thirdPage"><a href="#thirdPage">الراعي الرسمي</a></li>
+                    <li data-menuanchor="fourthPage"><a href="#fourthPage">جوائز المسابقة</a></li>
+                    <li data-menuanchor="fifthPage"><a href="#fifthPage">مرئيات</a></li>
+                    <li data-menuanchor="sixthPage"><a href="#sixthPage">اتصل بنا</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if session_user %}
+                        <li><a href="{% url 'Client:ProfileClient' logout_user %}">زيارة حسابي الشخصي</a>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'Client:LoginClient' %}">تسجيل الدخول</a></li>
+                        <li><a href="{% url 'Client:RegisterClient' %}">الالتحاق</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="fullpage">
+    <div class="section my-nav">
+        <div class="polygon"></div>
+        <div class="my-content">
+            <div class="container-fluid content-header">
+                <div class="col-md-3 visible-md visible-lg">
+                    <img src="{% static "image/logo.png" %}" class="center-image" width="30%">
+                    <p class="h3">الجامعة الاسلامية</p>
+                    <p class="h3">Islamic University of Gaza </p>
+                </div>
+                <div class="col-md-6 sec-div">
+                    <div class="titles-parent">
+                        <span class="my-supTitle">مسابقة</span>
+                        <img src="{% static "image/logo1.png" %}">
+                    </div>
+                </div>
+                <div class="col-md-3 visible-md visible-lg">
+                    <img src="{% static "image/logo.png" %}" class="center-image" width="30%">
+                    <p class="h3">كلية الآداب</p>
+                    <p class="h3">Faculty of Arts</p>
+                </div>
+            </div>
+            {#                <span id="go-to-down" class="scrollin-btn"><i class="fa fa-arrow-down"></i></span>#}
+        </div>
+    </div>
+    <div class="section my-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>اهداف المسابقة</h1>
+                    <p class="text-justify">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+                        النص من
+                        مولد النص العربى،
+                        حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
+                        التى
+                        يولدها
+                        التطبيق.
+                        إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما
+                        تريد،
+                        النص
+                        لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص،
+                        حيث
+                        يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.
+                        ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد
+                        النص
+                        العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه
+                        التصميم
+                        فيظهر بشكل لا يليق.
+                        هذا النص يمكن أن يتم تركيبه على أي تصميم دون مشكلة فلن يبدو وكأنه نص منسوخ، غير منظم،
+                        غير
+                        منسق،
+                        أو حتى غير مفهوم. لأنه مازال نصاً بديلاً ومؤقتاً.</p>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section my-section sec-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>راعي المسابقة</h1>
+                    <p class="text-justify">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
+                        النص من
+                        مولد النص العربى،
+                        حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
+                        التى
+                        يولدها
+                        التطبيق.
+                        إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما
+                        تريد،
+                        النص
+                        لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص،
+                        حيث
+                        يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.
+                        ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد
+                        النص
+                        العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه
+                        التصميم
+                        فيظهر بشكل لا يليق.
+                        هذا النص يمكن أن يتم تركيبه على أي تصميم دون مشكلة فلن يبدو وكأنه نص منسوخ، غير منظم،
+                        غير
+                        منسق،
+                        أو حتى غير مفهوم. لأنه مازال نصاً بديلاً ومؤقتاً.</p>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section my-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="my-cart">
+                        100$
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="my-cart">1</div>
+                    <div class="my-cart">2</div>
+                    <div class="my-cart">3</div>
+                    <div class="my-cart">4</div>
+                    <div class="my-cart">5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section my-section">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque distinctio eius et expedita rerum, suscipit!
+    </div>
+    <div class="section my-section">
+
+        <div class="text-center footer-main-page">
+            <p>
+                <sub>&copy;</sub>
+                <span>جميع الحقوق محفوظة</span>
+                <span>لكلية الآداب - الجامعة الإسلامية بغزة</span>
+                <span>{% now "Y" %}</span>
+            </p>
+        </div>
+    </div>
+    {#        <div class="container-fluid">#}
+    {#            <div class="row">#}
+    {#                <div class="my-section ">#}
+    {#                    <div class="container">#}
+    {#                        <div class="col-md-6">#}
+    {#                            <h1>كلمة عميد الكلية</h1>#}
+    {#                            <p class="text-justify">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا#}
+    {#                                النص من#}
+    {#                                مولد النص العربى،#}
+    {#                                حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف#}
+    {#                                التى#}
+    {#                                يولدها#}
+    {#                                التطبيق.#}
+    {#                                إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما#}
+    {#                                تريد،#}
+    {#                                النص#}
+    {#                                لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص،#}
+    {#                                حيث#}
+    {#                                يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.#}
+    {#                                ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد#}
+    {#                                النص#}
+    {#                                العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه#}
+    {#                                التصميم#}
+    {#                                فيظهر بشكل لا يليق.#}
+    {#                                هذا النص يمكن أن يتم تركيبه على أي تصميم دون مشكلة فلن يبدو وكأنه نص منسوخ، غير منظم،#}
+    {#                                غير#}
+    {#                                منسق،#}
+    {#                                أو حتى غير مفهوم. لأنه مازال نصاً بديلاً ومؤقتاً.</p>#}
+    {#                        </div>#}
+    {#                        <div class="col-md-6">#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="my-section sec-section">#}
+    {#                    <div class="container">#}
+    {#                        <div class="col-md-6">#}
+    {#                            <h1>راعي المسابقة</h1>#}
+    {#                            <p class="text-justify">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا#}
+    {#                                النص من#}
+    {#                                مولد النص العربى،#}
+    {#                                حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف#}
+    {#                                التى#}
+    {#                                يولدها#}
+    {#                                التطبيق.#}
+    {#                                إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما#}
+    {#                                تريد،#}
+    {#                                النص#}
+    {#                                لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص،#}
+    {#                                حيث#}
+    {#                                يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.#}
+    {#                                ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد#}
+    {#                                النص#}
+    {#                                العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه#}
+    {#                                التصميم#}
+    {#                                فيظهر بشكل لا يليق.#}
+    {#                            </p></div>#}
+    {#                        <div class="col-md-6">#}
+    {##}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="my-section">#}
+    {#                    <div class="container">#}
+    {#                        <h1>مرئيات</h1>#}
+    {#                        <div class="gallery js-flickity">#}
+    {#                            {% for video in videos %}#}
+    {#                                <div class="gallery-cell"#}
+    {#                                     style="background-image: url('{{ video.poster }}');">#}
+    {#                                    <a href="#"><i class="fa fa-play"></i></a>#}
+    {#                                    <p>{{ video.title }}</p>#}
+    {#                                </div>#}
+    {#                            {% endfor %}#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="text-center">#}
+    {#                <p>#}
+    {#                    <sub style="font-size:24px">&copy;</sub>#}
+    {#                    <span>جميع الحقوق محفوظة</span>#}
+    {#                    <span>لكلية الآداب - الجامعة الإسلامية بغزة</span>#}
+    {#                    <span>{% now "Y" %}</span>#}
+    {#                </p>#}
+    {#            </div>#}
+    {#        </div>#}
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/gallery.js' %}"></script>
+    <script src="{% static 'js/fullpage.min.js' %}"></script>
+    {#    <script src="{% static 'js/fullpage.extensions.min.js' %}"></script>#}
+    <script src="{% static "js/mainPage.js" %}"></script>
+
+{% endblock %}

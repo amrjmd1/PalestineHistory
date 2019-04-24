@@ -1,0 +1,124 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'image/dashboard_icon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datedropper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/date.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block style %}
+    {% endblock %}
+</head>
+<body class="nice padding padding_top_manger">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="manger container-fluid">
+        <span>{{ session_user }}</span>
+        <a href="{% url 'Dashboard:logoutDashboard' logout_user %}">تسجيل الخروج</a>
+    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="">الشعار</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="">المسابقة</a></li>
+                <li><a href="">التسجيل</a></li>
+                <li><a href="">الإدارة</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="fixed-menu manger_height">
+    <span class="fixed-menu-show"><i class="fa fa-bars"></i></span>
+    <ul>
+        <li class="{% block ActiveHome %}{% endblock %}"><a href="{% url "Dashboard:HomePage" %}"><i
+                class="fa fa-home"></i>&nbsp;<span>الرئيسية</span></a>
+        </li>
+        <li><a class="collapse_fixed" data-toggle="collapse" href="#collapse_client" aria-expanded="false"
+               aria-controls="collapseExample"><i class="fa fa-plus"></i>&nbsp;<span>المستخدمين</span></a></li>
+
+        <ul class="collapse" id="collapse_client">
+            <li class="{% block ActiveUsers %}{% endblock %}"><a href="{% url 'Dashboard:Users:ViewUsers' %}"><i
+                    class="fas fa-users"></i>&nbsp;<span>عرض المستخدمين</span></a>
+            </li>
+            <li><a href="{% url 'Dashboard:Users:AddUser' %}"><i class="fas fa-user-plus"></i>&nbsp;<span>أضف مستخدم جديد</span></a>
+            </li>
+        </ul>
+
+        <li><a class="collapse_fixed" data-toggle="collapse" href="#collapse_category" aria-expanded="false"
+               aria-controls="collapseExample"><i class="fa fa-plus"></i>&nbsp;<span>الفئات</span></a></li>
+
+        <ul class="collapse" id="collapse_category">
+            <li class="{% block ActiveCategory %}{% endblock %}"><a
+                    href="{% url 'Dashboard:Category:ViewCategories' %}"><i
+                    class="fa fa-tags"></i>&nbsp;<span>عرض الفئات</span></a>
+            </li>
+            <li><a href="{% url 'Dashboard:Category:Add_Category' %}"><i class="fa fa-plus-circle"></i>&nbsp;<span>أضف فئة جديدة</span></a>
+            </li>
+        </ul>
+
+        <li><a class="collapse_fixed" data-toggle="collapse" href="#collapse_fixed" aria-expanded="false"
+               aria-controls="collapseExample"><i class="fa fa-plus"></i>&nbsp;<span>الاختبارات</span></a></li>
+        <ul class="collapse" id="collapse_fixed">
+            <li class="{% block ActiveExam %}{% endblock %}"><a href="{% url 'Dashboard:Exam:ViewExams' %}">
+                <i class="fa fa-pencil-alt"></i>&nbsp;<span>عرض الاختبارت</span></a>
+            </li>
+            <li><a href="{% url 'Dashboard:Exam:Add_Exam' %}"><i class="fa fa-plus-circle"></i>&nbsp;<span>أضف إختبار جديد</span></a>
+            </li>
+        </ul>
+
+        <li><a class="collapse_fixed" data-toggle="collapse" href="#collapse_fixed-1" aria-expanded="false"
+               aria-controls="collapseExample"><i class="fa fa-plus"></i>&nbsp;<span>الأحداث</span></a></li>
+        <ul class="collapse" id="collapse_fixed-1">
+            <li class="{% block ActiveEvent %}{% endblock %}"><a href="{% url 'Dashboard:Event:ViewEvent' %}"><i
+                    class="fa fa-globe"></i>&nbsp;<span>كل الأحداث</span></a>
+            </li>
+            <li class="{% block ActiveAddEvent %}{% endblock %}"><a href="{% url 'Dashboard:Event:addeventshow' %}"><i
+                    class="fa fa-plus-circle"></i>&nbsp;<span>إضافة حدث</span></a>
+            </li>
+        </ul>
+
+        <li><a class="collapse_fixed" data-toggle="collapse" href="#collapse_fixed-2" aria-expanded="false"
+               aria-controls="collapseExample"><i class="fa fa-plus"></i>&nbsp;<span>بنك الأسئلة</span></a></li>
+        <ul class="collapse" id="collapse_fixed-2">
+            <li class="{% block ActiveQuestion %}{% endblock %}">
+                <a href="{% url 'Dashboard:Questions:ViewQuestions' %}">
+                    <i class="fa fa-question-circle"></i>&nbsp;<span>عرض الأسئلة</span></a></li>
+            <li class="{% block ActiveAddQuestion %}{% endblock %}">
+                <a href="{% url 'Dashboard:Questions:UploadFiles' %}">
+                    <i class="fa fa-plus-circle"></i>&nbsp;<span>إضافة أسئلة</span></a></li>
+        </ul>
+    </ul>
+</div>
+
+<div class="container-fluid">
+    <div id="view_title_page">
+        <span id="dashboard_span">لوحة التحكم</span>
+        <span id="title_span">{{ title }}</span>
+    </div>
+    {% block body %}
+    {% endblock %}
+</div>
+
+
+<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/datedropper.min.js' %}"></script>
+<script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>

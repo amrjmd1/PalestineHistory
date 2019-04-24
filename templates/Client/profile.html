@@ -1,0 +1,56 @@
+{% extends 'master.html' %}
+{% load staticfiles %}
+{% block meta %}
+    <meta property="Check_Verify_Code" content="{% url 'Client:Check_Verify_Code_Ajax' %}">
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">
+    {% if client.is_active %}
+        <link rel="stylesheet" href="{% static 'css/active.css' %}">
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+    {% if client.is_active %}
+        <div>
+        <div class="container events">
+            {% if events %}
+                <div class="my-progress">
+                    {% for event in events %}
+                        <span class="circle" data-date="{{ event.start_date|date:'Y, m, d' }}"
+                              data-count="{{ forloop.counter }}"
+                              data-title="{{ event.title }}" data-toggle="tooltip"
+                              data-placement="top">{{ forloop.counter }}</span>
+                    {% endfor %}
+                    <span class="fill" data-toggle="tooltip" data-placement="left"></span>
+                </div>
+                <div id="active-carousel" class="carousel my-carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        {% now "Y-m-d" as todays_date %}
+                        {% for event in events %}
+                            <div class="item" id="face-{{ forloop.counter }}">
+                                {% if event.start_date|date:"Y-m-d" <= todays_date %}
+                                    <p class="lead">{{ event.description }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <script src="{% static 'js/is_active.js' %}"></script>
+    {% endif %}
+</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+    {% if client.is_active %}
+        <script src="{% static 'js/active.js' %}"></script>
+    {% endif %}
+{% endblock %}
+{% block nice_scroll %}
+{% endblock %}
+{% block bootstrap-select %}
+{% endblock %}
